@@ -1,16 +1,4 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <title>Navigation menus &laquo; Admin</title>
-  <link rel="stylesheet" href="../assets/vendors/bootstrap/css/bootstrap.css">
-  <link rel="stylesheet" href="../assets/vendors/font-awesome/css/font-awesome.css">
-  <link rel="stylesheet" href="../assets/vendors/nprogress/nprogress.css">
-  <link rel="stylesheet" href="../assets/css/admin.css">
-  <script src="../assets/vendors/nprogress/nprogress.js"></script>
-</head>
-<body>
-  <script>NProgress.start()</script>
+<%- include('./layout/getHeaderPage.ejs'); %>
 
   <div class="main">
     <%- include('./layout/getNavBarPage.ejs');  %>
@@ -94,8 +82,5 @@
   </div>
 
   <%- include('./layout/getAsidePage.ejs'); %>
-  <script src="../assets/vendors/jquery/jquery.js"></script>
-  <script src="../assets/vendors/bootstrap/js/bootstrap.js"></script>
-  <script>NProgress.done()</script>
-</body>
-</html>
+
+    <%- include('./layout/getBottomPage.ejs'); %>
