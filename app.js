@@ -1,5 +1,7 @@
 // 使用express应用
 const express = require('./node_modules/express')
+// 引入第三方模块body-barser
+var bodyParser = require('body-parser')
 // 创建服务器
 const app = express()
 // 引入路由
@@ -12,6 +14,8 @@ app.listen(3005,()=>{
 })
 // 托管静态页面
 app.use('/assets',express.static('assets'))
+// 配置body-parser中间件
+app.use(bodyParser.urlencoded({extended:true}))
 // 配置模块引擎为ejs
 app.set('view engine','ejs')
 // 配置ejs的模板文件夹，自动去指定的目录下寻找页面文件

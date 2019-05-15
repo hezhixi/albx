@@ -2,6 +2,8 @@
 const express = require('./node_modules/express')
 // 引入自定义控制器模块
 var controller = require('./controller/indexController')
+// 引入登录控制页面
+var loginController = require('./controller/loginController')
 // 创建路由
 var router = express.Router()
 // 创建路由模块
@@ -36,5 +38,8 @@ router.get('/',controller.getIndexController)
       .get('/admin/slides',controller.getAdminSlidesController)
       // users页面
       .get('/admin/users',controller.getAdminUsersController)
+
+      // 后台登录页面邮箱
+      .post('/admin/login',loginController.getEmailPassword)
 // 暴露这个路由
 module.exports=router
