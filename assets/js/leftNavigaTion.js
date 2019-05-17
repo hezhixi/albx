@@ -1,16 +1,17 @@
 $(function() {
-  // 判断是否有参数，问好
-  var index = location.href.indexOf('?')
-  // 定义一个值
-  var routername
-  // 如果没有
-  if (index == -1) {
-    // 就提取‘/’的路由
-    routername = location.href.substring(location.href.lastIndexOf('/') + 1)
-  } else {
-    routername = location.href.substring(
-      location.href.lastIndexOf('/') + 1,index)
-  }
+  // // 判断是否有参数，问好
+  // var index = location.href.indexOf('?')
+  // // 定义一个值
+  // var routername
+  // // 如果没有
+  // if (index == -1) {
+  //   // 就提取‘/’的路由
+  //   routername = location.href.substring(location.href.lastIndexOf('/') + 1)
+  // } else {
+  //   routername = location.href.substring(
+  //     location.href.lastIndexOf('/') + 1,index)
+  // }
+  var routername = itcast.getRouterName(location.href)
   // 获取到当前元素，为元素进行相关设置
   // 设置文章导航栏
   var menu_posts = $('#menu-posts')
@@ -33,5 +34,6 @@ $(function() {
     menu_settings.attr('aria-expanded', true)
   }
 //   为当前li元素添加样式
+$('li').removeClass('active')
 $('#'+routername).addClass('active')
 })

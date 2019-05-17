@@ -1,3 +1,4 @@
+// var querystring = require('querystring')
 // 前台页面，主页面
 exports.getIndexController=(req,res)=>{
     res.render('index.ejs')
@@ -11,7 +12,22 @@ exports.getListController=(req,res)=>{
 }
 // 后台页面，主页面
 exports.getAdminIndexController=(req,res)=>{
-    res.render('admin/index.ejs')
+    if(req.session.isLogin && req.session.isLogin =='true'){
+        // render 不会去执行控制器中的处理方法，直接渲染相应的页面文件
+        res.render('admin/index.ejs')
+    }else{
+        // 跳转到新的处理程序中继续执行，相当于流浪器发送了一个新的请求
+        res.redirect('admin/login')
+    }
+    //  // 判断有没有登录过
+    //  var mycookie = querystring.parse(req.headers.cookie)
+    //  if(mycookie.isLogin && mycookie.isLogin == 'true'){
+    //      // 下面这个配置的作用是配置ejs的模板文件夹，
+    //      // 以后ejs会自动的去指定的目录下寻找页面文件
+    //     res.render('admin/index.ejs')
+    //  }else{
+    //      res.render('admin/login.ejs')
+    //  }
 }
 // categories页面
 exports.getAdmincategoriesController=(req,res)=>{

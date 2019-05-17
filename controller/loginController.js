@@ -13,10 +13,20 @@ exports.getEmailPassword=(req,res)=>{
         }else{
             if(data){
                 if(data.password==req.body.password){
-                    res.json({
+                    // 在登录成功时，写入session
+                    req.session.isLogin = 'true'
+                    req.session.currentUser = data
+                    // res.writeHead(200,{
+                    //     'Set-Cookie':'isLogin=true'
+                    // })
+                    res.end(JSON.stringify({
                         code:200,
                         msg:'登录成功'
-                    })
+                    }))
+                    // res.json({
+                    //     code:200,
+                    //     msg:'登录成功'
+                    // })
                 }else{
                     res.json({
                         code:201,
