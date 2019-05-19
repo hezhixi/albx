@@ -4,6 +4,8 @@ const express = require('./node_modules/express')
 var controller = require('./controller/indexController')
 // 引入登录控制页面
 var loginController = require('./controller/loginController')
+// 引入分类目录的控制页面
+var cateController = require('./controller/cateController')
 // 创建路由
 var router = express.Router()
 // 创建路由模块
@@ -41,5 +43,15 @@ router.get('/',controller.getIndexController)
 
       // 后台登录页面邮箱
       .post('/admin/login',loginController.getEmailPassword)
+      // 获取后台分类页面
+      .get('/categories',cateController.cateControllerPage)
+      // 实现编辑页面
+      .post('/categories/edit',cateController.cateGoriesEdit)
+      // 实现添加数据
+      .post('/categories/add',cateController.cateGoriesAdd)
+      // 实现单个按钮删除
+      .get('/categories/del',cateController.cateGoriesDel)
+      // 实现批量删除
+      .get('/categories/allDel',cateController.cateGoriesAllDel)
 // 暴露这个路由
 module.exports=router

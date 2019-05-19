@@ -12,7 +12,7 @@ var router = require('./router')
 var ejs = require('./node_modules/ejs')
 // 监听端口
 app.listen(3005,()=>{
-    console.log('http://127.0.0.1:3005')
+    console.log('http://127.0.0.1:3005/admin')
 })
 // 托管静态页面
 app.use('/assets',express.static('assets'))

@@ -21,6 +21,7 @@ exports.getAdminIndexController=(req,res)=>{
     }
     //  // 判断有没有登录过
     //  var mycookie = querystring.parse(req.headers.cookie)
+    //  var mycookie = querystring.parse(req.headers.cookie)
     //  if(mycookie.isLogin && mycookie.isLogin == 'true'){
     //      // 下面这个配置的作用是配置ejs的模板文件夹，
     //      // 以后ejs会自动的去指定的目录下寻找页面文件
