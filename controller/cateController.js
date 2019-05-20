@@ -74,8 +74,10 @@ exports.cateGoriesDel=(req,res)=>{
 // 这里实现的是批量删除按钮的操作
 exports.cateGoriesAllDel=(req,res)=>{
     // console.log(req.url)
-    var ids = removerModule.getParameterAll(req.url).ids
-    // console.log(ids)
+    console.log(req.body)
+    // var ids = removerModule.getParameterAll(req.url).ids
+    var ids = req.body.ids
+    console.log(ids)
     // 获取数据
     cateModule.cateModuleAllDel(ids,(err)=>{
         if(err){

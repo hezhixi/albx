@@ -1,12 +1,6 @@
+// 这里获取的分类目录的数据
 // 这里获取mysql数据
-var mysql = require('mysql')
-var connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'root',
-  database: 'baixiu'
-})
-connection.connect()
+var connection = require('./commonModule')
 // 获取分类页面数据
 exports.cateModuleDate = (callback) => {
   var sql = 'SELECT * FROM categories where id <> 1'
@@ -53,8 +47,8 @@ exports.cateModuleDel=(id,callback)=>{
 }
 // 这里实现的是获取批量删除的多个数据
 exports.cateModuleAllDel=(id,callback)=>{
-    var sql = 'delete from categories where id in (?)'
-    connection.query(sql,[id],(err,result)=>{
+    var sql = `delete from categories where id in (${id})`
+    connection.query(sql,(err,result)=>{
         if(err){
             callback(err)
         }else{

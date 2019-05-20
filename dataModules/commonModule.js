@@ -6,4 +6,4 @@ var mysql = require('mysql')
     password : 'root',
     database : 'baixiu'
 })
-connection.connect()
+module.exports=connection

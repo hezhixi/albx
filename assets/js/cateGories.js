@@ -83,7 +83,7 @@ $(function() {
     // 获取当前复选框的checked属性，chenked只能通过prop来获取和设置
     var str = $(this).prop('checked')
     // 为所有的tbody中的复选框设置相同的checked属性
-    $('tbody .oneClick').prop('checked',str)
+    $('tbody .oneClick').prop('checked', str)
     // 获取所有的tbody中的被选中复选框，判断数量>1,显示批量删除按钮
     var lists = $('tbody .oneClick:checked')
     // console.log(much)
@@ -112,68 +112,72 @@ $(function() {
       $('.clickAll').prop('checked', false)
     }
   })
-  
 })
 // 这里实现的是批量删除
-$('.btn-edits').on('click',function(){
+$('.btn-edits').on('click', function() {
   // 获取所有被选取的复选框
   var allChc = $('tbody .oneClick:checked')
   // 创建一个空数组
   var ids = []
   // 循环
-  for(var i=0;i<allChc.length;i++){
+  for (let i = 0; i < allChc.length; i++) {
     ids.push(allChc[i].dataset['id'])
-  // 发起请求
-  $.ajax({
-    type:'get',
-    url:'/categories/allDel',
-    traditional:true,
-    data:{ids},
-    dataType:'json',
-    success:function (result){
-      console.log(result)
-      if(result.code==200){
-        $('.alert-danger span').text(result.msg)
-        $('.alert-danger').fadeIn(1000)
-        .delay(2000)
-        .fadeOut(1000)
-        refresh()
-      }else{
-        $('.alert-danger span').text(result.msg)
-        $('.alert-danger').fadeIn(1000)
-        .delay(2000)
-        .fadeOut(1000)
+  }
+
+    // 发起请求
+    $.ajax({
+      type: 'post',
+      url: '/categories/allDel',
+      // traditional: true,
+      data: { ids:ids.join() },
+      dataType: 'json',
+      success: function(result) {
+        console.log(result)
+        // 判断循环是否完成
+        if (result.code == 200) {
+          // $('.alert-danger span').text(success(result.msg))
+          $('.alert-danger span').text(result.msg)
+          $('.alert-danger')
+            .fadeIn(1000)
+            .delay(2000)
+            .fadeOut(1000)
+          refresh()
+        } else {
+          // $('.alert-danger span').text(success(result.msg))
+          $('.alert-danger span').text(result.msg)
+          $('.alert-danger')
+            .fadeIn(1000)
+            .delay(2000)
+            .fadeOut(1000)
+        }
       }
+    })
+})
+
+// 反复使用的请求ajax
+function refresh() {
+  $.ajax({
+    type: 'get',
+    url: '/categories',
+    dataType: 'json',
+    success: function(result) {
+      // console.log(result)
+      var html = template('listTextTemp', { list: result })
+      $('tbody').html(html)
     }
   })
 }
-
-})
-
-  // 反复使用的请求ajax
-  function refresh() {
+// 这里实现的是点击单个按钮，实现删除当前内容
+function delCate(id) {
+  if (confirm('请问是否真的需要删除')) {
     $.ajax({
       type: 'get',
-      url: '/categories',
+      url: '/categories/del',
+      data: { id },
       dataType: 'json',
       success: function(result) {
         // console.log(result)
-        var html = template('listTextTemp', { list: result })
-        $('tbody').html(html)
-      }
-    })
-  }
-// 这里实现的是点击单个按钮，实现删除当前内容
-function delCate(id){
-  if(confirm('请问是否真的需要删除')){
-    $.ajax({
-      type:'get',
-      url:'/categories/del',
-      data:{id},
-      dataType:'json',
-      success:function(result){
-        // console.log(result)
-        if(result.code==200){
+        if (result.code == 200) {
           $('.alert-danger span').text(result.msg)
           //   显示隐藏域
           $('.alert-danger')
@@ -182,7 +186,7 @@ function delCate(id){
             .fadeOut(1000)
           // 刷新页面状态
           refresh()
-        }else{
+        } else {
           $('.alert-danger span').text(result.msg)
           //   显示隐藏域
           $('.alert-danger')
@@ -194,3 +198,43 @@ function delCate(id){
     })
   }
 }
+
+// // 这里实现的是批量删除
+// $('.btn-edits').on('click', function() {
+//   // 获取所有被选取的复选框
+//   var allChc = $('tbody .oneClick:checked')
+//   // 创建一个空数组
+//   var ids = []
+//   // 循环
+//   for (let i = 0; i < allChc.length; i++) {
+//     ids.push(allChc[i].dataset['id'])
+//     // 发起请求
+//     $.ajax({
+//       type: 'get',
+//       url: '/categories/allDel',
+//       traditional: true,
+//       data: { ids },
+//       dataType: 'json',
+//       success: function(result) {
+//         console.log(result)
+//       }
+//     })
+//   }
+//   // 判断循环是否完成
+//   if (ids.length == allChc.length) {
+//     // $('.alert-danger span').text(success(result.msg))
+//     $('.alert-danger span').text('批量删除成功')
+//     $('.alert-danger')
+//       .fadeIn(1000)
+//       .delay(2000)
+//       .fadeOut(1000)
+//     refresh()
+//   } else {
+//     // $('.alert-danger span').text(success(result.msg))
+//     $('.alert-danger span').text('批量删除失败')
+//     $('.alert-danger')
+//       .fadeIn(1000)
+//       .delay(2000)
+//       .fadeOut(1000)
+//   }
+// })

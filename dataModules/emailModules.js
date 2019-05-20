@@ -1,13 +1,6 @@
 // 获取sql中的数据
 // 引入mysql
-var mysql = require('mysql')
-var connection = mysql.createConnection({
-    host : 'localhost',
-    user : 'root',
-    password : 'root',
-    database : 'baixiu'
-})
-connection.connect()
+var connection = require('./commonModule')
 // 获取数据库的数据
 exports.getEmailModules=(email,callback)=>{
     var sql = 'select * from users where email = ?'

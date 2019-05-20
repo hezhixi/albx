@@ -6,6 +6,8 @@ var controller = require('./controller/indexController')
 var loginController = require('./controller/loginController')
 // 引入分类目录的控制页面
 var cateController = require('./controller/cateController')
+// 引入所有文章的控制页面
+var controllerAllPosts = require('./controller/postsAllController')
 // 创建路由
 var router = express.Router()
 // 创建路由模块
@@ -52,6 +54,9 @@ router.get('/',controller.getIndexController)
       // 实现单个按钮删除
       .get('/categories/del',cateController.cateGoriesDel)
       // 实现批量删除
-      .get('/categories/allDel',cateController.cateGoriesAllDel)
+      .post('/categories/allDel',cateController.cateGoriesAllDel)
+
+      // 实现的是所有文章的路由
+      .get('/allPosts',controllerAllPosts.allPosts)
 // 暴露这个路由
 module.exports=router
